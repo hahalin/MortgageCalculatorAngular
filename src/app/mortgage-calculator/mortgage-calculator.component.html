@@ -1,0 +1,42 @@
+<div class="container mt-5 col-md-12">
+    <h2>房貸計算器-Angular版</h2>        
+    <div class='row'>
+        <div class="col-md-4">
+            <form >
+                <div class="mb-3">
+                    <label htmlFor="loanAmount" class="form-label">借款金額</label>
+                    <input type="number" class="form-control" id="loanAmount" [(ngModel)]="loanAmount" name="loanAmount" />
+                </div>
+                <div class="mb-3">
+                    <label htmlFor="years" class="form-label">借款期限（年）</label>
+                    <input type="number" class="form-control" id="years" [(ngModel)]="years" name="years" />
+                </div>
+                <div class="mb-3">
+                    <label htmlFor="interestRate" class="form-label">年利率 (%)</label>
+                    <input type="number" class="form-control" id="interestRate" [(ngModel)]="interestRate" name="interestRate" />
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-check">
+                        <!-- (change)="handleSetRepaymentType('interest')"  -->
+                        <input class="form-check-input" type="radio" name="repaymentType" id="interest" value="interest" [(ngModel)]="repaymentType" />
+                        <label class="form-check-label" for="interest">本息攤還</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="repaymentType" id="principal" value="principal" [(ngModel)]="repaymentType" />
+                        <label class="form-check-label" for="principal">本金攤還</label>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="handleSubmit()">計算</button>
+            </form>
+        </div>
+        <div class='col-md-8'>
+            <div *ngIf="payments.length > 0 && repaymentType === 'interest'">
+                <h3>每月付款额：{{ formatPayment(payments[0].totalPayment.toFixed(0)) }} 元</h3> 
+            </div>
+            <div *ngIf="payments.length > 0 && repaymentType === 'principal'">
+                <app-payment-schedule-table [payments]="payments"></app-payment-schedule-table>
+            </div>
+        </div>
+    </div>    
+</div>

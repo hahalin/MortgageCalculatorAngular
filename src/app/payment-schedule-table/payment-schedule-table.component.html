@@ -1,0 +1,18 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>月份</th>
+            <th>本金</th>
+            <th>利息</th>
+            <th>總付款</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.month }}</td>
+          <td>{{ formatPayment(payment.principal.toFixed(0))}}</td>
+          <td>{{ formatPayment(payment.interest.toFixed(0))}}</td>
+          <td>{{ formatPayment(payment.totalPayment.toFixed(0))}}</td>
+        </tr>
+    </tbody>
+</table>
